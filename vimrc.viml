@@ -1,0 +1,24 @@
+ "Specify a directory for plugins
+ " - For Neovim: stdpath('data') . '/plugged'
+ " - Avoid using standard Vim directory names like 'plugin'
+ call plug#begin('~/.vim/plugged')
+
+ " Any valid git URL is allowed
+
+ Plug 'junegunn/vim-github-dashboard'
+ Plug 'junegunn/fzf' 
+
+ Plug 'vim-airline/vim-airline'
+ Plug 'vim-airline/vim-airline-themes'
+ Plug 'https://tpope.io/vim/fugitive.git'
+
+ " Initialize plugin system
+ call plug#end()
+
+ color desert
+ let g:netrw_banner = 0 " get rid of the useless banner
+ let g:netrw_browse_split = 2 " open new window vertically to the right
+ ":setlocal spell spelllang=en_us
+ nmap Ö <C-]>
+ nmap ö gf
+ 
