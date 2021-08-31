@@ -18,13 +18,16 @@ Plug 'neovim/nvim-lspconfig'
 " detect virtual env for python lsp
 Plug 'sansyrox/vim-python-virtualenv'
 Plug 'vim-scripts/indentpython.vim'
-
+" PLuging for golang
+Plug 'fatih/vim-go'
 " Initialize plugin system
 call plug#end()
 
 lua << EOF
 require'lspconfig'.pyright.setup{}
+require'lspconfig'.bashls.setup{}
 require'lspconfig'.rust_analyzer.setup{}
+require'lspconfig'.gopls.setup{}
 EOF
 
 colorscheme desert
