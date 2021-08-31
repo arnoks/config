@@ -1,24 +1,76 @@
- "Specify a directory for plugins
- " - For Neovim: stdpath('data') . '/plugged'
- " - Avoid using standard Vim directory names like 'plugin'
- call plug#begin('~/.vim/plugged')
+"Specify a directory for plugins
+" - For Neovim: stdpath('data') . '/plugged'
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
- " Any valid git URL is allowed
+" Any valid git URL is allowed
 
- Plug 'junegunn/vim-github-dashboard'
- Plug 'junegunn/fzf' 
+Plug 'junegunn/vim-github-dashboard'
+Plug 'junegunn/fzf' 
 
- Plug 'vim-airline/vim-airline'
- Plug 'vim-airline/vim-airline-themes'
- Plug 'https://tpope.io/vim/fugitive.git'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'https://tpope.io/vim/fugitive.git'
+Plug 'neovim/nvim-lspconfig'
+" vim-syntastic/syntastic " activate for vim nvim uses lspconfig
+" detect virtual env for python lsp
+Plug 'sansyrox/vim-python-virtualenv'
+Plug 'vim-scripts/indentpython.vim'
 
- " Initialize plugin system
- call plug#end()
+" Initialize plugin system
+call plug#end()
 
- color desert
- let g:netrw_banner = 0 " get rid of the useless banner
- let g:netrw_browse_split = 2 " open new window vertically to the right
- ":setlocal spell spelllang=en_us
- nmap Ö <C-]>
- nmap ö gf
- 
+lua << EOF
+require'lspconfig'.pyright.setup{}
+require'lspconfig'.rust_analyzer.setup{}
+EOF
+
+colorscheme desert
+let g:netrw_banner = 0 " get rid of the useless banner
+let g:netrw_browse_split = 2 " open new window vertically to the right
+":setlocal spell spelllang=en_us
+
+" Open file Using Öffnen to follow links and öffen to goto files 
+nmap Ö <C-]>
+nmap ö gf
+
+"Default Split Method to the right
+set splitright
+
+" Moving to windows left right up and down
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+" use space bar for folding
+nnoremap <space> za
+
+au BufNewFile,BufRead *.py
+    \ set tabstop=4|
+    \ set softtabstop=4|
+    \ set shiftwidth=4|
+    \ set textwidth=79|
+    \ set expandtab|
+    \ set autoindent|
+
+set encoding=utf-8
+
+" For the terminal Window allow esc key
+tnoremap <Esc> <C-\><C-n>
+tnoremap <A-h> <C-\><C-N><C-w>h
+tnoremap <A-j> <C-\><C-N><C-w>j
+tnoremap <A-k> <C-\><C-N><C-w>k
+tnoremap <A-l> <C-\><C-N><C-w>l
+inoremap <A-h> <C-\><C-N><C-w>h
+inoremap <A-j> <C-\><C-N><C-w>j
+inoremap <A-k> <C-\><C-N><C-w>k
+inoremap <A-l> <C-\><C-N><C-w>l
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
+
