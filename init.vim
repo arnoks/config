@@ -6,7 +6,7 @@
 call plug#begin('~/.vim/plugged')
 
 " Any valid git URL is allowed
-
+Plug 'preservim/nerdtree'
 Plug 'junegunn/vim-github-dashboard'
 Plug 'junegunn/fzf' 
 
