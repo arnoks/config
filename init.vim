@@ -79,6 +79,11 @@ nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
 
+" tabs
+nnoremap <A-Right> :tabnext<Cr>
+nnoremap <A-Left> :tabprevious<Cr>
+nnoremap <A-N> :tabnew<Cr>
+
 " standard lsp config see https://github.com/neovim/nvim-lspconfig 
 lua << EOF
 local nvim_lsp = require('lspconfig')
