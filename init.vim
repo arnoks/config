@@ -20,6 +20,9 @@ Plug 'sansyrox/vim-python-virtualenv'
 Plug 'vim-scripts/indentpython.vim'
 " PLuging for golang
 Plug 'fatih/vim-go'
+" Plugin for terraform lsp 
+" Install the ls via dnf 
+Plug 'prabirshrestha/vim-lsp'
 " Initialize plugin system
 call plug#end()
 
@@ -129,3 +132,6 @@ for _, lsp in ipairs(servers) do
 end
 EOF
 
+let g:LanguageClient_serverCommands = {
+	    \ 'terraform': ['terraform-ls', 'serve'],
+    \ }
