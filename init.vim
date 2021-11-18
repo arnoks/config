@@ -1,12 +1,14 @@
-" Use Plugged plaging manager to ease installation of plugins
-" https://github.com/junegunn/vim-plug
+" Use Plugged pluging manager to ease installation of plugins
+" git clone https://github.com/junegunn/vim-plug
+" cp vim-plug/plug.vim ~/.local/share/nvim/site/autoload/plug.vim 
+" copy vim-plug/plug.vim ~/AppData/Local/nvim/autoload/plug.vim 
 "Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
 " Any valid git URL is allowed
-
+Plug 'preservim/nerdtree'
 Plug 'junegunn/vim-github-dashboard'
 Plug 'junegunn/fzf' 
 
@@ -14,11 +16,12 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'https://tpope.io/vim/fugitive.git'
 Plug 'neovim/nvim-lspconfig'
-" vim-syntastic/syntastic " activate for vim nvim uses lspconfig
+
+" vim-syntastic/syntastic 
 " detect virtual env for python lsp
 Plug 'sansyrox/vim-python-virtualenv'
 Plug 'vim-scripts/indentpython.vim'
-" PLuging for golang
+" Pluging for golang
 Plug 'fatih/vim-go'
 " Plugin for terraform lsp 
 " Install the ls via dnf 
@@ -81,6 +84,11 @@ nnoremap <A-h> <C-w>h
 nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
+
+" tabs
+nnoremap <A-Right> :tabnext<Cr>
+nnoremap <A-Left> :tabprevious<Cr>
+nnoremap <A-N> :tabnew<Cr>
 
 " standard lsp config see https://github.com/neovim/nvim-lspconfig 
 lua << EOF
