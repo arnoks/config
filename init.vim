@@ -1,5 +1,7 @@
-" Use Plugged plaging manager to ease installation of plugins
-" https://github.com/junegunn/vim-plug
+" Use Plugged pluging manager to ease installation of plugins
+" git clone https://github.com/junegunn/vim-plug
+" cp vim-plug/plug.vim ~/.local/share/nvim/site/autoload/plug.vim 
+" copy vim-plug/plug.vim ~/AppData/Local/nvim/autoload/plug.vim 
 "Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
@@ -14,12 +16,16 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'https://tpope.io/vim/fugitive.git'
 Plug 'neovim/nvim-lspconfig'
-" vim-syntastic/syntastic " activate for vim nvim uses lspconfig
+
+" vim-syntastic/syntastic 
 " detect virtual env for python lsp
 Plug 'sansyrox/vim-python-virtualenv'
 Plug 'vim-scripts/indentpython.vim'
-" PLuging for golang
+" Pluging for golang
 Plug 'fatih/vim-go'
+" Plugin for terraform lsp 
+" Install the ls via dnf 
+Plug 'prabirshrestha/vim-lsp'
 " Initialize plugin system
 call plug#end()
 
@@ -134,3 +140,6 @@ for _, lsp in ipairs(servers) do
 end
 EOF
 
+let g:LanguageClient_serverCommands = {
+	    \ 'terraform': ['terraform-ls', 'serve'],
+    \ }
