@@ -1,0 +1,24 @@
+
+
+INITVIM=~/.config/nvim/init.vim 
+
+all:build/git_config build/fish_config build/tmux_config
+
+build/git_config: git_config.sh
+	mkdir -p build
+	touch build/git_config
+	./git_config.sh
+
+build/fish_config:
+	./fish_config.sh 
+	touch build/fish_config 
+
+build/tmux_config:tmux_config.sh
+	./tmux_config.sh
+	touch build/tmux_config
+
+
+build/neovim_config: 
+	./neovim_config.sh
+	touch build/neovim_config
+

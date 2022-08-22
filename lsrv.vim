@@ -1,32 +1,5 @@
-" Use Plugged pluging manager to ease installation of plugins
-" git clone https://github.com/junegunn/vim-plug
-" cp vim-plug/plug.vim ~/.local/share/nvim/site/autoload/plug.vim 
-" copy vim-plug/plug.vim ~/AppData/Local/nvim/autoload/plug.vim 
-"Specify a directory for plugins
-" - For Neovim: stdpath('data') . '/plugged'
-" - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
-
-" Any valid git URL is allowed
-Plug 'preservim/nerdtree'
-Plug 'junegunn/vim-github-dashboard'
-Plug 'junegunn/fzf' 
-
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'https://tpope.io/vim/fugitive.git'
 Plug 'neovim/nvim-lspconfig'
-
-" vim-syntastic/syntastic 
-" detect virtual env for python lsp
-Plug 'sansyrox/vim-python-virtualenv'
-Plug 'vim-scripts/indentpython.vim'
-" Pluging for golang
-Plug 'fatih/vim-go'
-" Plugin for terraform lsp 
-" Install the ls via dnf 
-Plug 'prabirshrestha/vim-lsp'
-" Initialize plugin system
 call plug#end()
 
 lua << EOF
@@ -35,60 +8,6 @@ require'lspconfig'.bashls.setup{}
 require'lspconfig'.rust_analyzer.setup{}
 require'lspconfig'.gopls.setup{}
 EOF
-
-colorscheme desert
-let g:netrw_banner = 0 " get rid of the useless banner
-let g:netrw_browse_split = 2 " open new window vertically to the right
-":setlocal spell spelllang=en_us
-
-" Open file Using Öffnen to follow links and öffen to goto files 
-nmap Ö <C-]>
-nmap ö gf
-
-"Default Split Method to the right
-set splitright
-
-" Moving to windows left right up and down
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
-" Enable folding
-set foldmethod=indent
-set foldlevel=99
-" use space bar for folding
-nnoremap <space> za
-
-au BufNewFile,BufRead *.py
-    \ set tabstop=4|
-    \ set softtabstop=4|
-    \ set shiftwidth=4|
-    \ set textwidth=79|
-    \ set expandtab|
-    \ set autoindent|
-
-set encoding=utf-8
-
-" For the terminal Window allow esc key
-tnoremap <Esc> <C-\><C-n>
-tnoremap <A-h> <C-\><C-N><C-w>h
-tnoremap <A-j> <C-\><C-N><C-w>j
-tnoremap <A-k> <C-\><C-N><C-w>k
-tnoremap <A-l> <C-\><C-N><C-w>l
-inoremap <A-h> <C-\><C-N><C-w>h
-inoremap <A-j> <C-\><C-N><C-w>j
-inoremap <A-k> <C-\><C-N><C-w>k
-inoremap <A-l> <C-\><C-N><C-w>l
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
-
-" tabs
-nnoremap <A-Right> :tabnext<Cr>
-nnoremap <A-Left> :tabprevious<Cr>
-nnoremap <A-N> :tabnew<Cr>
 
 " standard lsp config see https://github.com/neovim/nvim-lspconfig 
 lua << EOF
@@ -116,7 +35,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
   buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename:()<CR>', opts)
   buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
@@ -129,7 +48,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'rust_analyzer', 'tsserver' }
+local servers = { 'pyright', 'rust_analyzer', 'gopls', 'bashls' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -140,6 +59,3 @@ for _, lsp in ipairs(servers) do
 end
 EOF
 
-let g:LanguageClient_serverCommands = {
-	    \ 'terraform': ['terraform-ls', 'serve'],
-    \ }

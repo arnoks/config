@@ -1,12 +1,18 @@
 
 
-TMUXCONF=~/.tmux.conf
-INITVIM=~/.config/nvim/init.vim 
+all: build/user_config build/jenkins_config build/moby_config ./terraform_config.sh
 
-all: ${INITVIM} ${TMUXCONF}
+build/user_config:
+	./git_config.sh
+	./user_config.sh	
 
-~/.config/nvim/init.vim: init.vim
-	cp  $< $@ 
+build/jenkins_config:
+	./jenkins_config.sh	
 
-~/.tmux.conf: tmux.conf 
-	cp  $< $@
+build/moby_config:
+	./moby_config.sh
+
+build/terraform_config:
+	./terraform_config.sh
+
+
