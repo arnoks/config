@@ -10,7 +10,7 @@ return require('packer').startup(function()
 	-- install plugin for fish shell syntax highlighting
 	use 'khaveesh/vim-fish-syntax'
 	-- git integration using fugitiv
-	use 'https://tpope.io/vim/fugitive.git'	
+	use 'https://tpope.io/vim/fugitive.git'
 	-- Language server configuration
 	use 'neovim/nvim-lspconfig'
 	-- enable autocompletion using cmp
