@@ -27,6 +27,7 @@ Plug 'fatih/vim-go'
 " Install the ls via dnf 
 Plug 'prabirshrestha/vim-lsp'
 " Initialize plugin system
+Plug 'gruvbox-community/gruvbox'
 call plug#end()
 
 lua << EOF
@@ -36,7 +37,7 @@ require'lspconfig'.rust_analyzer.setup{}
 require'lspconfig'.gopls.setup{}
 EOF
 
-colorscheme desert
+colorscheme gruvbox
 let g:netrw_banner = 0 " get rid of the useless banner
 let g:netrw_browse_split = 2 " open new window vertically to the right
 ":setlocal spell spelllang=en_us
