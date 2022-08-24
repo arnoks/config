@@ -1,4 +1,4 @@
 
 
 rustdev: Dockerfile 
-	docker build -t arnoks/rustdev .
+	docker build --env-var user=$(USER)  -t arnoks/rustdev .

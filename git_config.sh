@@ -1,7 +1,12 @@
 #!/usr/bin/bash
 
-git config --global user.name "Arno Schamber"
-git config --global user.email arno.schamber@deutsche-boerse.com
+if [[ $# > 1 ]] 
+then
+	git config --global user.name $1 
+	git config --global user.email $2
+else
+	echo "user.name and user.email not set"
+fi 
 git config --global init.defaultBranch main
 git config --global alias.co checkout
 git config --global alias.br branch
