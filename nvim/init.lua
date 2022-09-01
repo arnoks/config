@@ -37,3 +37,6 @@ require 'lsp-config'
 
 -- Configure autocompletion
 require 'cmp-config'
+
+-- Python debugger configuration lua/dap-python-config.lua
+require 'dap-python-config' 
