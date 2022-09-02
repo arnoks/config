@@ -52,7 +52,6 @@ return require('packer').startup(function()
 		'nvim-telescope/telescope.nvim', tag = '0.1.0',
 		requires = { { 'nvim-lua/plenary.nvim' } }
 	}
-	use 'nvim-telescope/telescope.nvim'
 	use 'BurntSushi/ripgrep'
 	use 'telescope-fzf-native.nvim'
 end)
