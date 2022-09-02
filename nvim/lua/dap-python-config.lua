@@ -22,6 +22,8 @@ vim.keymap.set('n', '<leader>dn', require 'dap-python'.test_method, { noremap = 
 vim.keymap.set('n', '<leader>df', require 'dap-python'.test_class, { noremap = true, silent = true })
 vim.keymap.set('v', '<leader>ds', require 'dap-python'.debug_selection, { noremap = true, silent = true })
 
+-- Go Adapter
+require('dap-go').setup({})
 
 -- Current default for the ui
 require("dapui").setup({

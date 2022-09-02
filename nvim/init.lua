@@ -45,3 +45,7 @@ require 'dap-python-config'
 
 -- Telescope Setup lua/telescope-config.lua
 require 'telescope-config'
+
+-- Treesitter configuration lua/tree-sitter-config.lua
+require 'tree-sitter-config'
+

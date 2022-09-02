@@ -44,6 +44,9 @@ return require('packer').startup(function()
 	-- Install debugger includes client, adapter(per language) and debugger
 	use 'mfussenegger/nvim-dap' -- The client
 	use 'mfussenegger/nvim-dap-python' -- the adapter for python, provides defaults and setup
+	use 'leoluz/nvim-dap-go'
+	use 'nvim-telescope/telescope-dap.nvim'
+
 	-- debugger UI
 	use 'theHamsta/nvim-dap-virtual-text'
 	use 'rcarriga/nvim-dap-ui'
@@ -54,4 +57,10 @@ return require('packer').startup(function()
 	}
 	use 'BurntSushi/ripgrep'
 	use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+
+	-- Treesitter
+	use {
+	        'nvim-treesitter/nvim-treesitter',
+        	run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+    	}
 end)
