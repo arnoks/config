@@ -53,5 +53,5 @@ return require('packer').startup(function()
 		requires = { { 'nvim-lua/plenary.nvim' } }
 	}
 	use 'BurntSushi/ripgrep'
-	use 'telescope-fzf-native.nvim'
+	use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 end)
