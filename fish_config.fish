@@ -1,8 +1,11 @@
 #!/usr/bin/env fish
-# install oh my fish plugin 
-abbr -a vim nvim
-curl -L https://get.oh-my.fish | fish 
-# Use the fishbone theme
-omf install  emoji-powerline # does not work in container
+mkdir -p $HOME/bin $HOME/.local/bin $HOME/.cargo/bin 
+
+#
 fish_add_path --prepend $HOME/bin $HOME/.local/bin $HOME/.cargo/bin 
+# install oh my fish plugin 
+curl -L https://get.oh-my.fish | fish 
+# Use the powerline theme
+echo "run  omf install emoji-powerline "
+
 
