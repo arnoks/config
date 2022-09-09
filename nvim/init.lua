@@ -20,20 +20,32 @@ vim.api.nvim_set_keymap('n', '<A-N>', ':tabnew<Cr>', { noremap = true })
 vim.o.foldmethod = 'indent'
 vim.o.foldlevel = 99
 
--- " use space bar for folding
-vim.api.nvim_set_keymap('n', '<space>', 'za', { noremap = true })
+-- use space bar for folding
+-- vim.api.nvim_set_keymap('n', '<space>','za', { noremap=true}) -- comment to use <space> as <leader>
+
+vim.g.mapleader = ' '
 
 vim.g['netrw_banner'] = 0
 
 -- use packer to install plugins for nvim
--- install plugins
+-- install plugins lua/packer-plugins.lua
 require 'packer-plugins'
 
 -- Configure gruvbox
 require 'gruvbox-config'
 
--- lsp config
-require 'lsp-config'
+-- lsp config lua/lsp-config.lua setup inclued in cmp config
+-- require 'lsp-config'
 
--- Configure autocompletion
+-- Configure autocompletion lua/cmp-config.lua
 require 'cmp-config'
+
+-- Python debugger configuration lua/dap-python-config.lua
+require 'dap-python-config'
+
+-- Telescope Setup lua/telescope-config.lua
+require 'telescope-config'
+
+-- Treesitter configuration lua/tree-sitter-config.lua
+require 'tree-sitter-config'
+
