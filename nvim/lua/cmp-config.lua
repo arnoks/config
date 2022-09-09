@@ -66,7 +66,7 @@ cmp.setup.cmdline(':', {
 -- Setup lspconfig.
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local on_attach = function(client, bufnr)
-	local opts = { noremap = true, silent = true, buffer = 0 }
+	local opts = { noremap = true, silent = true, buffer = bufnr }
 
 	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
 	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)

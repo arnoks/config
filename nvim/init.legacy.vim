@@ -1,7 +1,5 @@
-" Use Plugged pluging manager to ease installation of plugins
-" git clone https://github.com/junegunn/vim-plug
-" cp vim-plug/plug.vim ~/.local/share/nvim/site/autoload/plug.vim 
-" copy vim-plug/plug.vim ~/AppData/Local/nvim/autoload/plug.vim 
+" Use Plugged plaging manager to ease installation of plugins
+" https://github.com/junegunn/vim-plug
 "Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
@@ -11,43 +9,28 @@ call plug#begin('~/.vim/plugged')
 Plug 'preservim/nerdtree'
 Plug 'junegunn/vim-github-dashboard'
 Plug 'junegunn/fzf' 
-
+Plug 'khaveesh/vim-fish-syntax'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'https://tpope.io/vim/fugitive.git'
 Plug 'neovim/nvim-lspconfig'
-" vim-syntastic/syntastic " activate for vim nvim uses lspconfig
+
+" vim-syntastic/syntastic 
 " detect virtual env for python lsp
 Plug 'sansyrox/vim-python-virtualenv'
 Plug 'vim-scripts/indentpython.vim'
 " Pluging for golang
 Plug 'fatih/vim-go'
-" Plugin for terraform lsp 
-" Install the ls via dnf 
-Plug 'prabirshrestha/vim-lsp'
-"Plug 'https://github.com/iamcco/markdown-preview.nvim.git'
-
-" Auto Completion
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
-
-" For vsnip users.
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
-Plug 'gruvbox-community/gruvbox'
+" Initialize plugin system
 call plug#end()
 
 lua << EOF
 require'lspconfig'.pyright.setup{}
-require'lspconfig'.bashls.setup{}
 require'lspconfig'.rust_analyzer.setup{}
 require'lspconfig'.gopls.setup{}
 EOF
 
-colorscheme gruvbox
+colorscheme desert
 let g:netrw_banner = 0 " get rid of the useless banner
 let g:netrw_browse_split = 2 " open new window vertically to the right
 ":setlocal spell spelllang=en_us
@@ -140,7 +123,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'rust_analyzer', 'tsserver' }
+local servers = { 'pyright', 'rust_analyzer' , 'gopls'}
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -151,83 +134,3 @@ for _, lsp in ipairs(servers) do
 end
 EOF
 
-set mouse=a
-
-
-
-
-set completeopt=menu,menuone,noselect
-" Install autocompletion form hrsh7th/nvim-cmp
-lua <<EOF
-  -- Setup nvim-cmp.
-  local cmp = require'cmp'
-
-  cmp.setup({
-    snippet = {
-      -- REQUIRED - you must specify a snippet engine
-      expand = function(args)
-        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-      end,
-    },
-    mapping = {
-      ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-      ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-      ['<C-e>'] = cmp.mapping({
-        i = cmp.mapping.abort(),
-        c = cmp.mapping.close(),
-      }),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    },
-    sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
-      { name = 'vsnip' }, -- For vsnip users.
-      -- { name = 'luasnip' }, -- For luasnip users.
-      -- { name = 'ultisnips' }, -- For ultisnips users.
-      -- { name = 'snippy' }, -- For snippy users.
-    }, {
-      { name = 'buffer' },
-    })
-  })
-
-  -- Set configuration for specific filetype.
-  cmp.setup.filetype('gitcommit', {
-    sources = cmp.config.sources({
-      { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it. 
-    }, {
-      { name = 'buffer' },
-    })
-  })
-
-  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-  cmp.setup.cmdline('/', {
-    sources = {
-      { name = 'buffer' }
-    }
-  })
-
-  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-  cmp.setup.cmdline(':', {
-    sources = cmp.config.sources({
-      { name = 'path' }
-    }, {
-      { name = 'cmdline' }
-    })
-  })
-
-  -- Setup lspconfig.
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-  require('lspconfig')['pyright'].setup {
-    capabilities = capabilities
-  }
-EOF
-
-
-
-let g:LanguageClient_serverCommands = {
-	    \ 'terraform': ['terraform-ls', 'serve'],
-    \ }
