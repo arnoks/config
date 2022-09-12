@@ -9,3 +9,10 @@
 
 
 ## Installation
+
+``` bash     
+mkdir -p gihub.deutsche-boerse.de/schaarn
+cd gihub.deutsche-boerse.de/schaarn
+git clone git@github.deutsche-boerse.de:schaarn/devenv.git 
+
+```

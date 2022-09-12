@@ -18,5 +18,5 @@ RUN ./tmux_config.sh
 RUN ./git_config.sh
 RUN ./neovim_config.sh
 RUN ./compilers_config.sh
-RUN ./fish_config.fish 
+RUN ./fish_config_docker.fish 
 WORKDIR /home/$user
